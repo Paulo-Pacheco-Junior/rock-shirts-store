@@ -1,14 +1,14 @@
 import { IoCartOutline } from "react-icons/io5";
-import logoImg from "../assets/logo.jpg";
+import logoImg from "../assets/logo.png";
 
 export function Header() {
   return (
-    <header className="flex justify-between items-center bg-[#F4F4F4] m-auto p-5 w-full">
-      <div className="size-12">
-        <img src={logoImg} alt="logo" className="size-full rounded-lg" />
+    <header className="flex justify-between items-center bg-[#e2e4e3] m-auto px-4 py-2 w-full">
+      <div className="w-12 ">
+        <img src={logoImg} alt="logo" className="size-full  rounded-md" />
       </div>
-      <button className="py-2 px-4 bg-slate-200 rounded-md">
-        <IoCartOutline />
+      <button className="p-2 rounded-md border">
+        <IoCartOutline size={18} />
       </button>
     </header>
   );
