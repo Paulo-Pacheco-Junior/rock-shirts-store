@@ -1,6 +1,8 @@
 import { RiStarSFill } from "react-icons/ri";
+import { useNavigate } from "react-router";
 
 interface Shirts {
+  id: number;
   img: string;
   brand: string;
   score: string;
@@ -14,8 +16,17 @@ interface ShirtsProps {
 }
 
 export function Shirts({ shirts }: ShirtsProps) {
+  const navigate = useNavigate();
+
+  const goToShirt = (id: number) => {
+    navigate(`shirt/${id}`);
+  };
+
   return (
-    <div className="flex flex-col h-auto bg-white  shadow-md pt-4">
+    <div
+      className="flex flex-col h-auto bg-white  shadow-md pt-4"
+      onClick={() => goToShirt(shirts.id)}
+    >
       <img
         src={shirts.img}
         alt="camiseta"

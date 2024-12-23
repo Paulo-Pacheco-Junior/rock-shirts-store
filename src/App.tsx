@@ -1,16 +1,14 @@
-import { Header } from "./components/Header";
-import { Shirts } from "./components/Shirts";
-import { shirts } from "../src/data";
+import { Home } from "./pages/Home";
+import { ShirtPage } from "./pages/ShirtPage";
+import { BrowserRouter, Routes, Route } from "react-router";
 
 export function App() {
   return (
-    <>
-      <Header />
-      <div className="grid grid-cols-2 gap-5 p-4 bg-[#f4f4f4] rounded-sm">
-        {shirts.map((shirt, index) => {
-          return <Shirts key={index} shirts={shirt} />;
-        })}
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/shirt/:id" element={<ShirtPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }

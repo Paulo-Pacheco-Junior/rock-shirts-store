@@ -1,4 +1,7 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { RiStarSFill } from "react-icons/ri";
+import { Link, useParams } from "react-router";
 
 interface Shirt {
   img: string;
@@ -7,36 +10,58 @@ interface Shirt {
   comments: string;
   name: string;
   price: string;
+  description: string;
 }
 
-interface ShirtProps {
-  shirt: Shirt;
-}
+export function ShirtPage() {
+  const [shirt, setShirt] = useState<Shirt>();
 
-export function ShirtPage({ shirt }: ShirtProps) {
+  const { id } = useParams();
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(`http://localhost:3000/shirts/${id}`);
+      const data = await response.data;
+      setShirt(data);
+    }
+    fetchData();
+  }, [id]);
+
   return (
-    <div className="flex flex-col h-auto bg-white  shadow-md pt-4">
-      <img
-        src={shirt.img}
-        alt="camiseta"
-        className="w-full h-auto rounded-md"
-      />
-      <div className="flex flex-col p-2">
-        <div className="flex justify-start items-center">
-          <span className="text-xs text-gray-500 mr-1 font-bold">
-            {shirt.brand}
-          </span>
-          <RiStarSFill className="text-yellow-300 mb-1" />
-          <span className="text-xs font-extrabold mr-1">{shirt.score}</span>
-          <span className="text-xs text-gray-400 font-bold">
-            ({shirt.comments})
-          </span>
+    <>
+      <Link
+        to={"/"}
+        className="text-slate-500 block font-bold py-2 px-4 border-b-2 border-slate-400 hover:border-slate-500 m-4"
+      >
+        Voltar
+      </Link>
+      <div className="flex flex-col h-auto bg-white  shadow-md pt-4">
+        <img
+          src={shirt?.img}
+          alt="camiseta"
+          className="w-full h-auto rounded-md"
+        />
+        <div className="flex flex-col px-4 pt-4">
+          <div className="flex items-center">
+            <span className="text-xs text-gray-500 mr-1 font-bold">
+              {shirt?.brand}
+            </span>
+            <RiStarSFill className="text-yellow-300 mb-1" />
+            <span className="text-xs font-extrabold mr-1">{shirt?.score}</span>
+            <span className="text-xs text-gray-400 font-bold">
+              ({shirt?.comments})
+            </span>
+          </div>
+          <span className="font-extrabold">{shirt?.name}</span>
         </div>
-        <span className="font-extrabold pb-1">{shirt.name}</span>
-        <span className="font-extrabold text-sm  text-purple-900 pb-1">
-          R$ {shirt.price}
+        <p className="p-4">{shirt?.description}</p>
+        <span className="font-extrabold text-sm  text-purple-900 pb-1 pl-4">
+          R$ {shirt?.price}
         </span>
+        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded m-4 mb-10">
+          COMPRAR AGORA
+        </button>
       </div>
-    </div>
+    </>
   );
 }
