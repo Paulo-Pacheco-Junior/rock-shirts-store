@@ -19,11 +19,10 @@ export function CartPage() {
     async function fetchData() {
       const response = await axios.get(`http://localhost:3000/cart`);
       const data = await response.data;
-      console.log(data);
       setShirts(data);
     }
     fetchData();
-  }, []);
+  }, [shirts]);
 
   return (
     <>
@@ -35,7 +34,7 @@ export function CartPage() {
       </Link>
       {shirts?.map((shirt) => {
         return (
-          <div key={shirt.id} className="flex py-4 mt-4 shadow-md">
+          <div key={shirt?.id} className="flex py-4 mt-4 shadow-md">
             <img
               src={shirt?.img}
               alt="camiseta"

@@ -19,8 +19,11 @@ export function ShirtPage() {
 
   const { id } = useParams();
 
-  const shirtToCart = () => {
-    async function fetchData() {
+  async function SendShirtToCart(shirtId: string | undefined) {
+    const response = await axios.get("http://localhost:3000/cart");
+    const cartData = await response.data;
+
+    if (!cartData.find((shirt: Shirt) => shirt.id === shirtId)) {
       await axios.post(`http://localhost:3000/cart`, {
         id: shirt?.id,
         img: shirt?.img,
@@ -29,16 +32,15 @@ export function ShirtPage() {
         price: shirt?.price,
       });
     }
-    fetchData();
-  };
+  }
 
   useEffect(() => {
-    async function fetchData() {
+    async function getShirt() {
       const response = await axios.get(`http://localhost:3000/shirts/${id}`);
       const data = await response.data;
       setShirt(data);
     }
-    fetchData();
+    getShirt();
   }, [id]);
 
   return (
@@ -76,7 +78,7 @@ export function ShirtPage() {
           to="/cart"
           className="bg-blue-500 hover:bg-blue-400 text-white font-bold
           py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded m-4 mb-10"
-          onClick={shirtToCart}
+          onClick={() => SendShirtToCart(shirt?.id)}
         >
           COMPRAR AGORA
         </Link>
