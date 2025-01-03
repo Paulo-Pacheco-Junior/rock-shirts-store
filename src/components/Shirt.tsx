@@ -1,51 +1,51 @@
 import { RiStarSFill } from "react-icons/ri";
 import { useNavigate } from "react-router";
 
-interface Shirts {
-  id: number;
+interface Shirt {
+  id: string;
   img: string;
   brand: string;
-  score: string;
+  score: number;
   comments: string;
   name: string;
   price: string;
 }
 
-interface ShirtsProps {
-  shirts: Shirts;
+interface ShirtProps {
+  shirt: Shirt;
 }
 
-export function Shirts({ shirts }: ShirtsProps) {
+export function Shirt({ shirt }: ShirtProps) {
   const navigate = useNavigate();
 
-  const goToShirt = (id: number) => {
+  const goToShirtPage = (id: string) => {
     navigate(`shirt/${id}`);
   };
 
   return (
     <div
       className="flex flex-col h-auto bg-white  shadow-md pt-4"
-      onClick={() => goToShirt(shirts.id)}
+      onClick={() => goToShirtPage(shirt.id)}
     >
       <img
-        src={shirts.img}
+        src={shirt.img}
         alt="camiseta"
         className="w-full h-auto rounded-md"
       />
       <div className="flex flex-col p-2">
         <div className="flex justify-start items-center">
           <span className="text-xs text-gray-500 mr-1 font-bold">
-            {shirts.brand}
+            {shirt.brand}
           </span>
           <RiStarSFill className="text-yellow-300 mb-1" />
-          <span className="text-xs font-extrabold mr-1">{shirts.score}</span>
+          <span className="text-xs font-extrabold mr-1">{shirt.score}</span>
           <span className="text-xs text-gray-400 font-bold">
-            ({shirts.comments})
+            ({shirt.comments})
           </span>
         </div>
-        <span className="font-extrabold pb-1">{shirts.name}</span>
+        <span className="font-extrabold pb-1">{shirt.name}</span>
         <span className="font-extrabold text-sm  text-purple-900 pb-1">
-          R$ {shirts.price}
+          R$ {shirt.price}
         </span>
       </div>
     </div>

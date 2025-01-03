@@ -1,5 +1,7 @@
 import { Home } from "./pages/Home";
 import { ShirtPage } from "./pages/ShirtPage";
+import { CartPage } from "./pages/CartPage";
+
 import { BrowserRouter, Routes, Route } from "react-router";
 
 export function App() {
@@ -8,6 +10,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shirt/:id" element={<ShirtPage />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
     </BrowserRouter>
   );

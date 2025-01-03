@@ -4,9 +4,10 @@ import { RiStarSFill } from "react-icons/ri";
 import { Link, useParams } from "react-router";
 
 interface Shirt {
+  id: string;
   img: string;
   brand: string;
-  score: string;
+  score: number;
   comments: string;
   name: string;
   price: string;
@@ -17,6 +18,19 @@ export function ShirtPage() {
   const [shirt, setShirt] = useState<Shirt>();
 
   const { id } = useParams();
+
+  const shirtToCart = () => {
+    async function fetchData() {
+      await axios.post(`http://localhost:3000/cart`, {
+        id: shirt?.id,
+        img: shirt?.img,
+        name: shirt?.name,
+        brand: shirt?.brand,
+        price: shirt?.price,
+      });
+    }
+    fetchData();
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -30,7 +44,7 @@ export function ShirtPage() {
   return (
     <>
       <Link
-        to={"/"}
+        to="/"
         className="text-slate-500 block font-bold py-2 px-4 border-b-2 border-slate-400 hover:border-slate-500 m-4"
       >
         Voltar
@@ -58,9 +72,14 @@ export function ShirtPage() {
         <span className="font-extrabold text-sm  text-purple-900 pb-1 pl-4">
           R$ {shirt?.price}
         </span>
-        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded m-4 mb-10">
+        <Link
+          to="/cart"
+          className="bg-blue-500 hover:bg-blue-400 text-white font-bold
+          py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded m-4 mb-10"
+          onClick={shirtToCart}
+        >
           COMPRAR AGORA
-        </button>
+        </Link>
       </div>
     </>
   );

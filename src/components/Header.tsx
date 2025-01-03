@@ -1,5 +1,6 @@
 import { IoCartOutline } from "react-icons/io5";
 import logoImg from "../assets/logo.png";
+import { Link } from "react-router";
 
 export function Header() {
   return (
@@ -7,9 +8,9 @@ export function Header() {
       <div className="w-12 ">
         <img src={logoImg} alt="logo" className="size-full  rounded-md" />
       </div>
-      <button className="p-2 rounded-md border">
+      <Link to="/cart" className="p-2 rounded-md border">
         <IoCartOutline size={18} />
-      </button>
+      </Link>
     </header>
   );
 }
