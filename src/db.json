@@ -63,25 +63,31 @@
   ],
   "cart": [
     {
-      "id": "2",
-      "img": "https://stamp.jetassets.com.br/produto/TS1752_2024-03-22_08_34_57_0.jpeg",
-      "name": "2Pac",
-      "brand": "Vans",
-      "price": "50,00"
-    },
-    {
       "id": "1",
       "img": "https://stamp.jetassets.com.br/produto/TS1672_2023-08-17_16_15_29_0.jpeg",
       "name": "Foo Fighters",
       "brand": "Vans",
-      "price": "50,00"
+      "price": "50,00",
+      "size": "P",
+      "counter": 1
     },
     {
-      "id": "6",
-      "img": "https://stamp.jetassets.com.br/produto/20210310154004_1172998828_H.png",
+      "id": "5",
+      "img": "https://stamp.jetassets.com.br/produto/20231113115227_8126991874_H.png",
+      "name": "AC/DC",
+      "brand": "Vans",
+      "price": "60,00",
+      "size": "M",
+      "counter": 1
+    },
+    {
+      "id": "4",
+      "img": "https://stamp.jetassets.com.br/produto/20231113133402_7608992392_H.jpg",
       "name": "Ramones",
       "brand": "Vans",
-      "price": "75,00"
+      "price": "70,00",
+      "size": "P",
+      "counter": 1
     }
   ]
 }

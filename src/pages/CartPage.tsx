@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import { Shirt } from "../components/Shirt";
 
 interface Shirt {
   id: string;
@@ -8,21 +9,43 @@ interface Shirt {
   name: string;
   brand: string;
   price: string;
+  size: "P" | "M" | "G";
+  counter: number;
 }
 
 export function CartPage() {
-  const [shirts, setShirts] = useState<Shirt[]>();
-  const [selectedSize, setSelectedSize] = useState("P");
-  const [counter, setCounter] = useState(1);
+  const [shirts, setShirts] = useState<Shirt[]>([]);
+
+  function handleSize(index: number, size: "P" | "M" | "G") {
+    const updatedShirts = [...shirts];
+
+    updatedShirts[index].size = size;
+
+    setShirts(updatedShirts);
+  }
+
+  function handleCounter(index: number, counter: number) {
+    if (counter > 0) {
+      const updatedShirts = [...shirts];
+
+      updatedShirts[index].counter = counter;
+
+      setShirts(updatedShirts);
+    } else {
+      const updatedShirts = shirts.filter((_, i) => i !== index);
+
+      setShirts(updatedShirts);
+    }
+  }
 
   useEffect(() => {
-    async function fetchData() {
+    async function getShirts() {
       const response = await axios.get(`http://localhost:3000/cart`);
       const data = await response.data;
       setShirts(data);
     }
-    fetchData();
-  }, [shirts]);
+    getShirts();
+  }, []);
 
   return (
     <>
@@ -32,7 +55,8 @@ export function CartPage() {
       >
         Voltar
       </Link>
-      {shirts?.map((shirt) => {
+
+      {shirts?.map((shirt, index) => {
         return (
           <div key={shirt?.id} className="flex py-4 mt-4 shadow-md">
             <img
@@ -52,8 +76,10 @@ export function CartPage() {
                   Tamanho:
                   <select
                     className="font-bold w-10 px-1"
-                    value={selectedSize}
-                    onChange={(e) => setSelectedSize(e.target.value)}
+                    value={shirt?.size}
+                    onChange={(e) =>
+                      handleSize(index, e.target.value as "P" | "M" | "G")
+                    }
                   >
                     <option value="P">P</option>
                     <option value="M">M</option>
@@ -68,14 +94,14 @@ export function CartPage() {
                 <div className="flex items-center justify-between border px-1 rounded-md">
                   <span
                     className="px-2"
-                    onClick={() => setCounter(counter - 1)}
+                    onClick={() => handleCounter(index, shirt?.counter - 1)}
                   >
                     -
                   </span>
-                  <span className="text-xs px-1 ">{counter}</span>
+                  <span className="text-xs px-1 ">{shirt?.counter}</span>
                   <span
                     className="px-2"
-                    onClick={() => setCounter(counter + 1)}
+                    onClick={() => handleCounter(index, shirt?.counter + 1)}
                   >
                     +
                   </span>

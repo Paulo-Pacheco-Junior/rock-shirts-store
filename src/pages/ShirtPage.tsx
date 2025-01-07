@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { RiStarSFill } from "react-icons/ri";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 
 interface Shirt {
   id: string;
@@ -17,6 +17,8 @@ interface Shirt {
 export function ShirtPage() {
   const [shirt, setShirt] = useState<Shirt>();
 
+  const navigate = useNavigate();
+
   const { id } = useParams();
 
   async function SendShirtToCart(shirtId: string | undefined) {
@@ -30,8 +32,11 @@ export function ShirtPage() {
         name: shirt?.name,
         brand: shirt?.brand,
         price: shirt?.price,
+        size: "P",
+        counter: 1,
       });
     }
+    navigate("/cart");
   }
 
   useEffect(() => {
@@ -74,14 +79,13 @@ export function ShirtPage() {
         <span className="font-extrabold text-sm  text-purple-900 pb-1 pl-4">
           R$ {shirt?.price}
         </span>
-        <Link
-          to="/cart"
+        <button
           className="bg-blue-500 hover:bg-blue-400 text-white font-bold
           py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded m-4 mb-10"
           onClick={() => SendShirtToCart(shirt?.id)}
         >
           COMPRAR AGORA
-        </Link>
+        </button>
       </div>
     </>
   );

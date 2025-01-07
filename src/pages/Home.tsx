@@ -4,7 +4,7 @@ import { Shirt } from "../components/Shirt";
 import axios from "axios";
 
 interface Shirt {
-  id: number;
+  id: string;
   img: string;
   brand: string;
   score: number;
@@ -18,12 +18,12 @@ export function Home() {
   const [shirts, setShirts] = useState<Shirt[]>([]);
 
   useEffect(() => {
-    async function fetchData() {
+    async function getShirts() {
       const response = await axios.get("http://localhost:3000/shirts");
       const data = await response.data;
       setShirts(data);
     }
-    fetchData();
+    getShirts();
   }, []);
 
   return (
