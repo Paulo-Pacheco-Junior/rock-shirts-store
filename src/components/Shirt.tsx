@@ -8,7 +8,7 @@ interface Shirt {
   score: number;
   comments: string;
   name: string;
-  price: string;
+  price: number;
 }
 
 interface ShirtProps {
@@ -45,7 +45,7 @@ export function Shirt({ shirt }: ShirtProps) {
         </div>
         <span className="font-extrabold pb-1">{shirt.name}</span>
         <span className="font-extrabold text-sm  text-purple-900 pb-1">
-          R$ {shirt.price}
+          {`R$ ${shirt.price.toFixed(2).replace(".", ",")}`}
         </span>
       </div>
     </div>

@@ -10,7 +10,7 @@ interface Shirt {
   score: number;
   comments: string;
   name: string;
-  price: string;
+  price: number;
   description: string;
 }
 

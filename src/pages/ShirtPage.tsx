@@ -10,7 +10,7 @@ interface Shirt {
   score: number;
   comments: string;
   name: string;
-  price: string;
+  price: number;
   description: string;
 }
 
@@ -77,7 +77,7 @@ export function ShirtPage() {
         </div>
         <p className="p-4">{shirt?.description}</p>
         <span className="font-extrabold text-sm  text-purple-900 pb-1 pl-4">
-          R$ {shirt?.price}
+          {`R$ ${shirt?.price.toFixed(2).replace(".", ",")}`}
         </span>
         <button
           className="bg-blue-500 hover:bg-blue-400 text-white font-bold

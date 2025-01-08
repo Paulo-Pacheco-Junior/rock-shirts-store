@@ -2,19 +2,22 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { Shirt } from "../components/Shirt";
+import { MdPix } from "react-icons/md";
+import { PiMoney } from "react-icons/pi";
 
 interface Shirt {
   id: string;
   img: string;
   name: string;
   brand: string;
-  price: string;
+  price: number;
   size: "P" | "M" | "G";
   counter: number;
 }
 
 export function CartPage() {
   const [shirts, setShirts] = useState<Shirt[]>([]);
+  const [paymentMethod, setPaymentMethod] = useState("pix");
 
   function handleSize(index: number, size: "P" | "M" | "G") {
     const updatedShirts = [...shirts];
@@ -36,6 +39,10 @@ export function CartPage() {
 
       setShirts(updatedShirts);
     }
+  }
+
+  function buyShirt() {
+    console.log(shirts);
   }
 
   useEffect(() => {
@@ -89,7 +96,9 @@ export function CartPage() {
               </div>
               <div className="flex flex-col justify-between items-end w-20 py-2 pr-2">
                 <span className="font-bold text-sm text-purple-900 ">
-                  R$ {shirt?.price}
+                  {`R$ ${(shirt?.price * shirt?.counter)
+                    .toFixed(2)
+                    .replace(".", ",")}`}
                 </span>
                 <div className="flex items-center justify-between border px-1 rounded-md">
                   <span
@@ -111,6 +120,67 @@ export function CartPage() {
           </div>
         );
       })}
+      <div className="flex justify-between items-center pt-8 px-6 ">
+        <span className="font-semibold">Total</span>
+        <span className="text-lg font-bold">
+          {`${shirts
+            ?.reduce((total, shirt) => total + shirt?.price * shirt?.counter, 0)
+            .toFixed(2)
+            .replace(".", ",")} `}
+        </span>
+      </div>
+      <div className="flex justify-center gap-8 px-8 py-8">
+        <div
+          className={`border rounded-md ${
+            paymentMethod === "pix"
+              ? "bg-slate-200 border-emerald-300"
+              : "bg-slate-50"
+          }`}
+        >
+          <label className="flex items-center py-4 px-8 gap-2 text-sm">
+            <input
+              type="radio"
+              value="pix"
+              checked={paymentMethod === "pix"}
+              onChange={(e) => setPaymentMethod(e.target.value)}
+              className="hidden"
+            />
+            <MdPix /> <span>Pix</span>
+          </label>
+        </div>
+        <div
+          className={`border rounded-md ${
+            paymentMethod === "withdrawal"
+              ? "bg-slate-200 border-emerald-300"
+              : "bg-slate-50"
+          }`}
+        >
+          <label className="flex items-center py-4 px-8 gap-2 text-sm">
+            <input
+              type="radio"
+              value="withdrawal"
+              checked={paymentMethod === "withdrawal"}
+              onChange={(e) => setPaymentMethod(e.target.value)}
+              className="hidden"
+            />
+            <PiMoney /> <span>Retirada</span>
+          </label>
+        </div>
+      </div>
+      <div className="flex flex-col gap-4 px-4 pb-8">
+        <button
+          className="bg-emerald-500 font-semibold text-sm text-white p-2 rounded-md"
+          onClick={buyShirt}
+        >
+          Continuar comprando
+        </button>
+        <button
+          className="bg-emerald-500 font-semibold text-sm text-white p-2 rounded-md"
+          onClick={buyShirt}
+        >
+          Finalizar compra
+        </button>
+      </div>
     </>
   );
 }
