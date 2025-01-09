@@ -56,7 +56,7 @@ export function ShirtPage() {
       >
         Voltar
       </Link>
-      <div className="flex flex-col h-auto bg-white  shadow-md pt-4">
+      <div className="flex flex-col h-auto bg-white shadow-md pt-4">
         <img
           src={shirt?.img}
           alt="camiseta"
@@ -80,8 +80,8 @@ export function ShirtPage() {
           {`R$ ${shirt?.price.toFixed(2).replace(".", ",")}`}
         </span>
         <button
-          className="bg-blue-500 hover:bg-blue-400 text-white font-bold
-          py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded m-4 mb-10"
+          className="bg-emerald-500 hover:bg-emerald-400 text-white font-bold
+          py-2 px-4 border-b-4 border-emerald-700 hover:border-emerald-500 rounded m-4 mb-10"
           onClick={() => SendShirtToCart(shirt?.id)}
         >
           COMPRAR AGORA

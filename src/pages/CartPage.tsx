@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import { Shirt } from "../components/Shirt";
 import { MdPix } from "react-icons/md";
 import { PiMoney } from "react-icons/pi";
+import { PixCode } from "../components/PixCode";
 
 interface Shirt {
   id: string;
@@ -18,6 +19,7 @@ interface Shirt {
 export function CartPage() {
   const [shirts, setShirts] = useState<Shirt[]>([]);
   const [paymentMethod, setPaymentMethod] = useState("pix");
+  const [togglePix, setTogglePix] = useState(false);
 
   function handleSize(index: number, size: "P" | "M" | "G") {
     const updatedShirts = [...shirts];
@@ -41,8 +43,11 @@ export function CartPage() {
     }
   }
 
-  function buyShirt() {
-    console.log(shirts);
+  function buyShirts() {
+    if (paymentMethod === "pix") {
+      console.log(shirts);
+      setTogglePix(!togglePix);
+    }
   }
 
   useEffect(() => {
@@ -120,10 +125,10 @@ export function CartPage() {
           </div>
         );
       })}
-      <div className="flex justify-between items-center pt-8 px-6 ">
-        <span className="font-semibold">Total</span>
-        <span className="text-lg font-bold">
-          {`${shirts
+      <div className="flex justify-between items-center pt-8 px-6">
+        <span className="text-sm font-semibold">Total</span>
+        <span className="font-semibold">
+          {`R$ ${shirts
             ?.reduce((total, shirt) => total + shirt?.price * shirt?.counter, 0)
             .toFixed(2)
             .replace(".", ",")} `}
@@ -167,16 +172,18 @@ export function CartPage() {
           </label>
         </div>
       </div>
+      {togglePix && <PixCode />}
       <div className="flex flex-col gap-4 px-4 pb-8">
-        <button
-          className="bg-emerald-500 font-semibold text-sm text-white p-2 rounded-md"
-          onClick={buyShirt}
+        <Link
+          to="/"
+          className="flex justify-center items-center bg-emerald-500 hover:bg-emerald-400 border-b-4 border-emerald-700 hover:border-emerald-500 font-semibold text-sm text-white p-2 rounded-md"
         >
           Continuar comprando
-        </button>
+        </Link>
         <button
-          className="bg-emerald-500 font-semibold text-sm text-white p-2 rounded-md"
-          onClick={buyShirt}
+          className="bg-emerald-500 hover:bg-emerald-400 border-b-4 border-emerald-700 hover:border-emerald-500 font-semibold text-sm text-white p-2 rounded-md"
+          onClick={buyShirts}
+          disabled={togglePix}
         >
           Finalizar compra
         </button>
