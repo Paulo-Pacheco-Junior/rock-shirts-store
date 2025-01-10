@@ -1,7 +1,10 @@
+import { useState } from "react";
 import Countdown, { CountdownRenderProps } from "react-countdown";
 import { LuCopy } from "react-icons/lu";
 
 export function PixCode() {
+  const [showCode, setShowCode] = useState(true);
+
   const renderer = ({
     hours,
     minutes,
@@ -9,6 +12,7 @@ export function PixCode() {
     completed,
   }: CountdownRenderProps) => {
     if (completed) {
+      setTimeout(() => setShowCode(false), 5000);
       return <ExpiredCodeAlert />;
     } else {
       return (
@@ -31,22 +35,27 @@ export function PixCode() {
   const fiveSecondsCountdown = Date.now() + 5000;
 
   return (
-    <div className="flex flex-col justify-center items-center pt-2 pb-4 px-4  mx-4 mb-4">
-      <p className="font-bold mb-4">Aguardando pagamento</p>
-      <p className="text-sm">
-        Copie o código abaixo e utilize o Pix Copia e Cola no aplicativo que vai
-        fazer o pagamento:
-      </p>
-      <div className="flex items-center gap-4 p-2 bg-slate-100 rounded-lg m-4">
-        <span className="text-sm">00020101021226770014BR.GOV.B</span>
-        <LuCopy className="text-red-500" />
-      </div>
-      <p className="text-sm">O tempo para você pagar acaba em:</p>
-      <span className="font-bold">
-        <Countdown date={fiveSecondsCountdown} renderer={renderer}>
-          <ExpiredCodeAlert />
-        </Countdown>
-      </span>
-    </div>
+    <>
+      {showCode && (
+        <div className="flex flex-col justify-center items-center pt-2 pb-4 px-4  mx-4 mb-4">
+          <p className="font-bold mb-4">Aguardando pagamento</p>
+          <p className="text-sm">
+            Copie o código abaixo e utilize o Pix Copia e Cola no aplicativo que
+            vai fazer o pagamento:
+          </p>
+          <div className="flex items-center gap-4 p-2 bg-slate-100 rounded-lg m-4">
+            <span className="text-sm">00020101021226770014BR.GOV.B</span>
+            <LuCopy className="text-red-500" />
+          </div>
+          <p className="text-sm">O tempo para você pagar acaba em:</p>
+
+          <span className="font-bold">
+            <Countdown date={fiveSecondsCountdown} renderer={renderer}>
+              <ExpiredCodeAlert />
+            </Countdown>
+          </span>
+        </div>
+      )}
+    </>
   );
 }

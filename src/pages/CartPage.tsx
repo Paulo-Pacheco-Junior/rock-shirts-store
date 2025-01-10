@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Shirt } from "../components/Shirt";
 import { MdPix } from "react-icons/md";
 import { PiMoney } from "react-icons/pi";
@@ -17,6 +17,8 @@ interface Shirt {
 }
 
 export function CartPage() {
+  const navigate = useNavigate();
+
   const [shirts, setShirts] = useState<Shirt[]>([]);
   const [paymentMethod, setPaymentMethod] = useState("pix");
   const [togglePix, setTogglePix] = useState(false);
@@ -29,23 +31,33 @@ export function CartPage() {
     setShirts(updatedShirts);
   }
 
-  function handleCounter(index: number, counter: number) {
+  async function handleCounter(index: number, counter: number) {
     if (counter > 0) {
       const updatedShirts = [...shirts];
 
       updatedShirts[index].counter = counter;
 
+      await axios.put(
+        `http://localhost:3000/cart/${shirts[index].id}`,
+        updatedShirts[index]
+      );
+
       setShirts(updatedShirts);
     } else {
       const updatedShirts = shirts.filter((_, i) => i !== index);
 
+      await axios.delete(`http://localhost:3000/cart/${shirts[index].id}`);
+
       setShirts(updatedShirts);
+
+      if (updatedShirts.length < 1) {
+        navigate("/");
+      }
     }
   }
 
   function buyShirts() {
     if (paymentMethod === "pix") {
-      console.log(shirts);
       setTogglePix(!togglePix);
     }
   }
@@ -165,7 +177,9 @@ export function CartPage() {
               type="radio"
               value="withdrawal"
               checked={paymentMethod === "withdrawal"}
-              onChange={(e) => setPaymentMethod(e.target.value)}
+              onChange={
+                !togglePix ? (e) => setPaymentMethod(e.target.value) : undefined
+              }
               className="hidden"
             />
             <PiMoney /> <span>Retirada</span>

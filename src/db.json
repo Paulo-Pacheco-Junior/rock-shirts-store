@@ -69,25 +69,25 @@
       "brand": "Vans",
       "price": 50,
       "size": "P",
-      "counter": 1
+      "counter": 3
     },
     {
-      "id": "5",
-      "img": "https://stamp.jetassets.com.br/produto/20231113115227_8126991874_H.png",
-      "name": "AC/DC",
-      "brand": "Vans",
-      "price": 60,
-      "size": "M",
-      "counter": 1
-    },
-    {
-      "id": "4",
-      "img": "https://stamp.jetassets.com.br/produto/20231113133402_7608992392_H.jpg",
+      "id": "6",
+      "img": "https://stamp.jetassets.com.br/produto/20210310154004_1172998828_H.png",
       "name": "Ramones",
       "brand": "Vans",
-      "price": 70,
+      "price": 75,
       "size": "P",
       "counter": 1
+    },
+    {
+      "id": "2",
+      "img": "https://stamp.jetassets.com.br/produto/TS1752_2024-03-22_08_34_57_0.jpeg",
+      "name": "2Pac",
+      "brand": "Vans",
+      "price": 50,
+      "size": "P",
+      "counter": 5
     }
   ]
 }
