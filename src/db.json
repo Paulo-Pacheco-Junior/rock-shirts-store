@@ -72,11 +72,11 @@
       "counter": 3
     },
     {
-      "id": "6",
-      "img": "https://stamp.jetassets.com.br/produto/20210310154004_1172998828_H.png",
-      "name": "Ramones",
+      "id": "3",
+      "img": "https://stamp.jetassets.com.br/produto/20231127112535_195999805_H.jpg",
+      "name": "Queen",
       "brand": "Vans",
-      "price": 75,
+      "price": 45,
       "size": "P",
       "counter": 1
     },
@@ -86,8 +86,8 @@
       "name": "2Pac",
       "brand": "Vans",
       "price": 50,
-      "size": "P",
-      "counter": 5
+      "size": "G",
+      "counter": 1
     }
   ]
 }

@@ -23,10 +23,15 @@ export function CartPage() {
   const [paymentMethod, setPaymentMethod] = useState("pix");
   const [togglePix, setTogglePix] = useState(false);
 
-  function handleSize(index: number, size: "P" | "M" | "G") {
+  async function handleSize(index: number, size: "P" | "M" | "G") {
     const updatedShirts = [...shirts];
 
     updatedShirts[index].size = size;
+
+    await axios.put(
+      `http://localhost:3000/cart/${shirts[index].id}`,
+      updatedShirts[index]
+    );
 
     setShirts(updatedShirts);
   }
@@ -59,6 +64,10 @@ export function CartPage() {
   function buyShirts() {
     if (paymentMethod === "pix") {
       setTogglePix(!togglePix);
+    }
+
+    if (paymentMethod === "withdrawal") {
+      navigate("../completed");
     }
   }
 
