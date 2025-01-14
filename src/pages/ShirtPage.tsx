@@ -56,11 +56,11 @@ export function ShirtPage() {
       >
         Voltar
       </Link>
-      <div className="flex flex-col h-auto bg-white shadow-md pt-4">
+      <div className="flex flex-col h-auto bg-white shadow-md p-3 pt-4 w-11/12 md:w-2/3 lg:w-3/4 lg:p-10 m-auto">
         <img
           src={shirt?.img}
           alt="camiseta"
-          className="w-full h-auto rounded-md"
+          className="w-11/12 h-auto md:w-3/4 m-auto rounded-md"
         />
         <div className="flex flex-col px-4 pt-4">
           <div className="flex items-center">

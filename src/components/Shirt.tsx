@@ -24,7 +24,7 @@ export function Shirt({ shirt }: ShirtProps) {
 
   return (
     <div
-      className="flex flex-col h-auto bg-white  shadow-md pt-4"
+      className="flex flex-col h-auto bg-white shadow-md pt-4"
       onClick={() => goToShirtPage(shirt.id)}
     >
       <img
@@ -44,7 +44,7 @@ export function Shirt({ shirt }: ShirtProps) {
           </span>
         </div>
         <span className="font-extrabold pb-1">{shirt.name}</span>
-        <span className="font-extrabold text-sm  text-purple-900 pb-1">
+        <span className="font-extrabold text-sm md:text-lg text-purple-900 pb-1">
           {`R$ ${shirt.price.toFixed(2).replace(".", ",")}`}
         </span>
       </div>

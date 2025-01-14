@@ -91,7 +91,10 @@ export function CartPage() {
 
       {shirts?.map((shirt, index) => {
         return (
-          <div key={shirt?.id} className="flex py-4 mt-4 shadow-md">
+          <div
+            key={shirt?.id}
+            className="flex w-11/12 md:w-3/4 lg:w-2/3 m-auto py-4 px-1 md:px-8 mt-4 shadow-md"
+          >
             <img
               src={shirt?.img}
               alt="camiseta"
@@ -146,8 +149,8 @@ export function CartPage() {
           </div>
         );
       })}
-      <div className="flex justify-between items-center pt-8 px-6">
-        <span className="text-sm font-semibold">Total</span>
+      <div className="flex justify-between items-center md:w-3/4 lg:w-2/3 m-auto pt-8 px-6">
+        <span className="text-sm md:text-base font-semibold">Total</span>
         <span className="font-semibold">
           {`R$ ${shirts
             ?.reduce((total, shirt) => total + shirt?.price * shirt?.counter, 0)
@@ -196,7 +199,7 @@ export function CartPage() {
         </div>
       </div>
       {togglePix && <PixCode />}
-      <div className="flex flex-col gap-4 px-4 pb-8">
+      <div className="flex flex-col gap-4 px-4 md:px-0 md:w-3/4 lg:w-2/3 m-auto pb-8">
         <Link
           to="/"
           className="flex justify-center items-center bg-emerald-500 hover:bg-emerald-400 border-b-4 border-emerald-700 hover:border-emerald-500 font-semibold text-sm text-white p-2 rounded-md"
