@@ -16,7 +16,9 @@ export function Header() {
 
   useEffect(() => {
     async function getShirtsLength() {
-      const response = await axios.get("http://localhost:3000/cart");
+      const response = await axios.get(
+        "https://rock-shirts-store-api.onrender.com/cart"
+      );
       const shirtsLength = await response.data.length;
       setShirtsLength(shirtsLength);
     }

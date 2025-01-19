@@ -19,7 +19,9 @@ export function Home() {
 
   useEffect(() => {
     async function getShirts() {
-      const response = await axios.get("http://localhost:3000/shirts");
+      const response = await axios.get(
+        "https://rock-shirts-store-api.onrender.com/shirts"
+      );
       const data = await response.data;
       setShirts(data);
     }

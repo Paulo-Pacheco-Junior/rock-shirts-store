@@ -24,7 +24,7 @@ export function Shirt({ shirt }: ShirtProps) {
 
   return (
     <div
-      className="flex flex-col h-auto bg-white shadow-md pt-4"
+      className="flex flex-col h-auto bg-white shadow-md pt-4 cursor-pointer"
       onClick={() => goToShirtPage(shirt.id)}
     >
       <img

@@ -29,7 +29,7 @@ export function CartPage() {
     updatedShirts[index].size = size;
 
     await axios.put(
-      `http://localhost:3000/cart/${shirts[index].id}`,
+      `https://rock-shirts-store-api.onrender.com/cart/${shirts[index].id}`,
       updatedShirts[index]
     );
 
@@ -43,7 +43,7 @@ export function CartPage() {
       updatedShirts[index].counter = counter;
 
       await axios.put(
-        `http://localhost:3000/cart/${shirts[index].id}`,
+        `https://rock-shirts-store-api.onrender.com/cart/${shirts[index].id}`,
         updatedShirts[index]
       );
 
@@ -51,7 +51,9 @@ export function CartPage() {
     } else {
       const updatedShirts = shirts.filter((_, i) => i !== index);
 
-      await axios.delete(`http://localhost:3000/cart/${shirts[index].id}`);
+      await axios.delete(
+        `https://rock-shirts-store-api.onrender.com/cart/${shirts[index].id}`
+      );
 
       setShirts(updatedShirts);
 
@@ -73,7 +75,9 @@ export function CartPage() {
 
   useEffect(() => {
     async function getShirts() {
-      const response = await axios.get(`http://localhost:3000/cart`);
+      const response = await axios.get(
+        `https://rock-shirts-store-api.onrender.com/cart`
+      );
       const data = await response.data;
       setShirts(data);
     }
@@ -111,7 +115,7 @@ export function CartPage() {
                 <label className="text-xs flex flex-col">
                   Tamanho:
                   <select
-                    className="font-bold w-10 px-1"
+                    className="font-bold w-10 px-1 cursor-pointer"
                     value={shirt?.size}
                     onChange={(e) =>
                       handleSize(index, e.target.value as "P" | "M" | "G")
@@ -131,14 +135,14 @@ export function CartPage() {
                 </span>
                 <div className="flex items-center justify-between border px-1 rounded-md">
                   <span
-                    className="px-2"
+                    className="px-2 cursor-pointer"
                     onClick={() => handleCounter(index, shirt?.counter - 1)}
                   >
                     -
                   </span>
                   <span className="text-xs px-1 ">{shirt?.counter}</span>
                   <span
-                    className="px-2"
+                    className="px-2 cursor-pointer"
                     onClick={() => handleCounter(index, shirt?.counter + 1)}
                   >
                     +
@@ -166,7 +170,7 @@ export function CartPage() {
               : "bg-slate-50"
           }`}
         >
-          <label className="flex items-center py-4 px-8 gap-2 text-sm">
+          <label className="flex items-center py-4 px-8 gap-2 text-sm cursor-pointer">
             <input
               type="radio"
               value="pix"
@@ -184,7 +188,7 @@ export function CartPage() {
               : "bg-slate-50"
           }`}
         >
-          <label className="flex items-center py-4 px-8 gap-2 text-sm">
+          <label className="flex items-center py-4 px-8 gap-2 text-sm cursor-pointer">
             <input
               type="radio"
               value="withdrawal"

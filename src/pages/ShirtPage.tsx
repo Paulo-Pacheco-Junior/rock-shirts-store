@@ -22,11 +22,13 @@ export function ShirtPage() {
   const { id } = useParams();
 
   async function SendShirtToCart(shirtId: string | undefined) {
-    const response = await axios.get("http://localhost:3000/cart");
+    const response = await axios.get(
+      "https://rock-shirts-store-api.onrender.com/cart"
+    );
     const cartData = await response.data;
 
     if (!cartData.find((shirt: Shirt) => shirt.id === shirtId)) {
-      await axios.post(`http://localhost:3000/cart`, {
+      await axios.post(`https://rock-shirts-store-api.onrender.com/cart`, {
         id: shirt?.id,
         img: shirt?.img,
         name: shirt?.name,
@@ -41,7 +43,9 @@ export function ShirtPage() {
 
   useEffect(() => {
     async function getShirt() {
-      const response = await axios.get(`http://localhost:3000/shirts/${id}`);
+      const response = await axios.get(
+        `https://rock-shirts-store-api.onrender.com/shirts/${id}`
+      );
       const data = await response.data;
       setShirt(data);
     }
